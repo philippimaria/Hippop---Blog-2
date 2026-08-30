@@ -1,29 +1,569 @@
-// Interações dos artigos do Hippop Wave
+/* ========================================
+   CONFIGURAÇÕES GERAIS
+======================================== */
 
-const botoes = document.querySelectorAll(".botao-interacao");
+* {
+    box-sizing: border-box;
+}
 
-botoes.forEach(function (botao) {
+html {
+    scroll-behavior: smooth;
+}
 
-    botao.addEventListener("click", function () {
+body {
+    margin: 0;
 
-        const tipo = botao.dataset.tipo;
+    background-color: #f7f3ff;
 
-        const contador = document.querySelector(
-            "#contador-" + tipo
-        );
+    color: #24153d;
 
-        let valorAtual = Number(contador.textContent);
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-        valorAtual++;
+    font-size: 18px;
 
-        contador.textContent = valorAtual;
+    line-height: 1.7;
+}
 
-        botao.classList.add("clicado");
+.container {
+    width: 90%;
 
-        botao.disabled = true;
+    max-width: 900px;
 
-        botao.setAttribute("aria-pressed", "true");
+    margin: 0 auto;
+}
 
-    });
 
-});
+/* ========================================
+   CABEÇALHO
+======================================== */
+
+body > header {
+    padding: 40px 0 28px;
+
+    background-color: #29104a;
+
+    color: #ffffff;
+
+    border-bottom: 6px solid #e9c500;
+}
+
+.nome-empresa {
+    margin: 0 0 6px;
+
+    color: #ffe866;
+
+    font-size: 0.9rem;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+body > header h1,
+.titulo-site {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 2.4rem;
+
+    font-weight: bold;
+}
+
+.subtitulo {
+    margin: 10px 0 20px;
+
+    color: #f2eaff;
+}
+
+
+/* ========================================
+   NAVEGAÇÃO
+======================================== */
+
+nav {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+nav a {
+    padding: 9px 16px;
+
+    border: 2px solid #ffffff;
+
+    border-radius: 6px;
+
+    color: #ffffff;
+
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+nav a:hover,
+nav a:focus {
+    background-color: #ffffff;
+
+    color: #29104a;
+
+    outline: 3px solid #ffe866;
+
+    outline-offset: 2px;
+}
+
+nav a[aria-current="page"] {
+    background-color: #ffe866;
+
+    border-color: #ffe866;
+
+    color: #29104a;
+}
+
+
+/* ========================================
+   CONTEÚDO PRINCIPAL
+======================================== */
+
+main {
+    min-height: 60vh;
+
+    padding-top: 40px;
+
+    padding-bottom: 50px;
+}
+
+section,
+article {
+    margin-bottom: 30px;
+
+    padding: 30px;
+
+    background-color: #ffffff;
+
+    border-left: 6px solid #7027a0;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 4px 14px
+        rgba(41, 16, 74, 0.12);
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
+h1 {
+    color: #3d1263;
+
+    font-size: 2.3rem;
+}
+
+h2 {
+    margin-top: 28px;
+
+    color: #4c176e;
+
+    font-size: 1.6rem;
+}
+
+h3 {
+    margin-top: 0;
+
+    color: #3d1263;
+
+    font-size: 1.4rem;
+}
+
+section h2,
+article h1 {
+    margin-top: 0;
+}
+
+p {
+    margin-top: 0;
+
+    margin-bottom: 18px;
+}
+
+.resumo {
+    color: #4d405b;
+
+    font-size: 1.1rem;
+}
+
+.categoria {
+    margin-bottom: 5px;
+
+    color: #6b1685;
+
+    font-size: 0.9rem;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+
+/* ========================================
+   CARDS
+======================================== */
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 24px;
+}
+
+.card {
+    display: flex;
+
+    flex-direction: column;
+
+    margin: 0;
+
+    padding: 0;
+
+    overflow: hidden;
+
+    background-color: #ffffff;
+
+    border: 2px solid #eadcf4;
+
+    border-left: 6px solid #7027a0;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 4px 14px
+        rgba(41, 16, 74, 0.12);
+
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(41, 16, 74, 0.18);
+}
+
+.card img {
+    display: block;
+
+    width: 100%;
+
+    height: 220px;
+
+    object-fit: cover;
+}
+
+.card-conteudo {
+    padding: 22px;
+}
+
+.card-conteudo p:not(.categoria) {
+    color: #4d405b;
+}
+
+
+/* ========================================
+   IMAGENS DOS ARTIGOS
+======================================== */
+
+.imagem-post {
+    margin: 25px 0 30px;
+}
+
+.imagem-post img {
+    display: block;
+
+    width: 100%;
+
+    max-height: 500px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(41, 16, 74, 0.18);
+}
+
+.imagem-post figcaption {
+    margin-top: 8px;
+
+    color: #62556f;
+
+    font-size: 0.9rem;
+
+    font-style: italic;
+
+    text-align: center;
+}
+
+
+/* ========================================
+   LISTA DA EQUIPE
+======================================== */
+
+.equipe {
+    margin: 0;
+
+    padding: 0;
+
+    list-style: none;
+}
+
+.equipe li {
+    margin-bottom: 14px;
+
+    padding: 16px;
+
+    background-color: #f1e7fa;
+
+    border-radius: 6px;
+}
+
+.equipe strong,
+.equipe span {
+    display: block;
+}
+
+.equipe span {
+    margin-top: 4px;
+
+    color: #493c53;
+}
+
+
+/* ========================================
+   BOTÕES
+======================================== */
+
+.botao {
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 12px 20px;
+
+    background-color: #5e1675;
+
+    color: #ffffff;
+
+    font-weight: bold;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+}
+
+.botao:hover,
+.botao:focus {
+    background-color: #351050;
+
+    outline: 3px solid #d2a900;
+
+    outline-offset: 3px;
+}
+
+
+/* ========================================
+   ÁREA DE INTERAÇÃO
+======================================== */
+
+.interacoes {
+    margin-top: 35px;
+
+    padding: 24px;
+
+    background-color: #f1e7fa;
+
+    border: 2px solid #dcc5ec;
+
+    border-left: 5px solid #e9c500;
+
+    border-radius: 8px;
+
+    box-shadow: none;
+}
+
+.interacoes h2 {
+    margin-top: 0;
+}
+
+.botoes-interacao {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 14px;
+}
+
+.botao-interacao {
+    padding: 12px 18px;
+
+    border: 2px solid #5e1675;
+
+    border-radius: 8px;
+
+    background-color: #ffffff;
+
+    color: #351050;
+
+    font-family: inherit;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.botao-interacao:hover,
+.botao-interacao:focus {
+    background-color: #5e1675;
+
+    color: #ffffff;
+
+    outline: 3px solid #ffe866;
+
+    outline-offset: 2px;
+}
+
+.botao-interacao.clicado {
+    background-color: #29104a;
+
+    border-color: #29104a;
+
+    color: #ffe866;
+
+    cursor: default;
+}
+
+.botao-interacao:disabled {
+    opacity: 1;
+}
+
+.botao-interacao span {
+    display: inline-block;
+
+    min-width: 24px;
+
+    margin-left: 5px;
+}
+
+
+/* ========================================
+   RODAPÉ
+======================================== */
+
+footer {
+    padding: 24px 0;
+
+    background-color: #1e0b34;
+
+    color: #ffffff;
+
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 700px) {
+
+    body {
+        font-size: 16px;
+    }
+
+    body > header h1,
+    .titulo-site {
+        font-size: 2rem;
+    }
+
+    section,
+    article {
+        padding: 22px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .card img {
+        height: 240px;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    nav a {
+        text-align: center;
+    }
+
+    .botoes-interacao {
+        flex-direction: column;
+    }
+
+    .botao-interacao {
+        width: 100%;
+    }
+}
+
+
+/* ========================================
+   TELAS MUITO PEQUENAS
+======================================== */
+
+@media (max-width: 400px) {
+
+    .container {
+        width: 94%;
+    }
+
+    body > header {
+        padding-top: 28px;
+    }
+
+    section,
+    article {
+        padding: 18px;
+    }
+
+    .imagem-post {
+        margin-left: 0;
+
+        margin-right: 0;
+    }
+}
+
